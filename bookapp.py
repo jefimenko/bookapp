@@ -3,9 +3,23 @@ from bookdb import BookDB
 
 BOOKS = BookDB()
 
-LIST_TEMPLATE = "<p><a href=\"/book/{id}\">{title}</a></p>"
+LIST_TEMPLATE = """
+<p>
+    <a href=\"/book/{id}\">{title}</a>
+</p>
+"""
 
-INFO_TEMPLATE = "<div><p>Title: {title}</p><p>Author: {author}</p><p>Publisher: {publisher}</p><p>ISBN: {isbn}</p></div><div><a href=\"/\">back</a></div>"
+INFO_TEMPLATE = """
+<div>
+    <p>Title: {title}</p>
+    <p>Author: {author}</p>
+    <p>Publisher: {publisher}</p>
+    <p>ISBN: {isbn}</p>
+</div>
+<div>
+    <a href=\"/\">back</a>
+</div>
+"""
 
 def resolve_path(path_info):
     urls = [(r'^$', books),
@@ -49,7 +63,7 @@ def application(environ, start_response):
     except NameError:
         status = "404 Not Found"
         body = "<h1>You failed</h1>"
-    except exception:
+    except Exception:
         status = "500 Internal Server Error"
         body = "<h1>We failed</h1>"
     finally:
