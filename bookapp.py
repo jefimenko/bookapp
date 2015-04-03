@@ -43,8 +43,9 @@ def application(environ, start_response):
         body = func(*args)
         status = "200 OK"
     except KeyboardInterrupt:
-        quit()
         body = ''
+        status = ''
+        quit()
     except NameError:
         status = "404 Not Found"
         body = "<h1>You failed</h1>"
